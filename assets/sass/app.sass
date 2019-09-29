@@ -1,0 +1,233 @@
+$recipeHeaderHeight: 340px
+//Colors
+$turquoise: rgba(61, 214, 208, 1)
+$redPurple: rgba(12, 10, 62, 1)
+$dustStorm: rgba(226, 194, 198, 1)
+$skyBlue: rgba(118, 146, 255, 1)
+$pastelPurple: rgba(194, 151, 184, 1)
+
+//Fonts
+$instructionFont: 'Open Sans', sans-serif
+$mainFont: 'Titan One', cursive
+$titleFont: 'Sniglet', cursive
+
+//Mixins
+@mixin text-shadow($color, $weight, $negWeight)
+    text-shadow: $negWeight $negWeight 0 $color, $weight $negWeight 0 $color, $negWeight $weight 0 $color, $weight $weight 0 $color
+
+//App Styles
+a
+    color: $skyBlue
+    &:hover
+        text-decoration: none
+        color: $turquoise
+    &:visited
+        border: black solid 400px
+
+body
+    overflow-y: scroll
+    background-color: $dustStorm
+    color: $redPurple
+    font-family: $mainFont
+
+.divider
+    background-color: $turquoise
+    height: 1.2rem
+    border: solid .35rem $pastelPurple
+    border-radius: .6rem
+    margin-top: 1rem
+    margin-bottom: 1rem
+
+.btn
+    @include text-shadow($redPurple, 1px, -1px)
+    color: $skyBlue
+    border-radius: 1rem
+
+.btn-info
+    background-color: $turquoise
+    border-color: $turquoise
+    &:hover
+        background-color: $skyBlue
+        border-color: $skyBlue
+
+.btn-danger
+    &:hover
+        background-color: #ff3545
+        border-color: #ff3545
+
+//Header Styles
+#appTitle h1 a
+    font-family: $titleFont
+    font-size: 80px
+    @include text-shadow($redPurple, 3px, -3px)
+    &:hover
+        @include text-shadow($skyBlue, 3px, -3px)
+
+#userName
+    text-align: right
+    font-size: 1.1em
+    @include text-shadow(white, 1px, -1px)
+    h6
+        display: inline
+        transition: text-shadow .2s
+        -webkit-transition: text-shadow .2s
+        &:hover
+            @include text-shadow($redPurple, 2px, -2px)
+            color: white
+            transition: text-shadow .2s
+            -webkit-transition: text-shadow .2s
+.alert:empty
+    display: none
+
+#recipeSearch
+    button        
+        background-color: $turquoise
+        border-radius: 0 .5em .5em 0
+        border: 1px solid $redPurple
+        color: $skyBlue
+        &:hover
+            background-color: $skyBlue
+            border-color: $skyBlue
+            color: white        
+
+//Dropdown Menu
+.dropdown
+    display: none
+    position: absolute
+    top: 1.5em
+    right: 0
+    z-index: 99
+    background-color: $turquoise
+    padding: .5em 1em
+    border: 1px solid $redPurple
+    border-radius: .5em
+    a
+        display: block
+        line-height: 2em
+        @include text-shadow($redPurple, 1px, -1px)
+        color: $skyBlue
+        &:hover
+            color: white
+
+.show
+    display: block !important
+
+//Recipe Styles
+.stickBottom
+    position: absolute
+    bottom: 0
+
+#recipeTitle
+    text-align: left
+    @include text-shadow(white, 1px, -1px)
+
+#recipeHeader
+    align-items: flex-end
+
+#recipeImage
+    height: $recipeHeaderHeight
+    object-fit: cover
+
+#recipeDescription
+    font-size: 1.2em
+    align-self: flex-start
+    position: relative
+    height: $recipeHeaderHeight
+    strong
+        font-weight: normal
+        @include text-shadow(white, 1px, -1px)
+
+#recipeDescriptionBox
+    background-color: white
+    padding: 8px 12px 0px 12px
+    border-radius: 10px
+
+#recipeSubmitted
+    font-size: 1.1em
+    text-align: right
+
+#recipe
+    li
+        font-family: $instructionFont
+
+#index
+    flex-wrap: wrap
+    .card
+        border: $redPurple solid .5rem
+        border-radius: .8rem
+        height: 20rem
+        margin-bottom: 2rem
+        hr
+            margin: 0
+            padding: 0
+            border-top: $redPurple solid .2rem
+        .card-body
+            background-color: $skyBlue
+            padding: 0
+            margin: 0
+            border-radius: 0 0 .2rem .2rem
+            height: 6rem
+        .card-title
+            color: $redPurple
+            @include text-shadow(white, 1px, -1px)
+            font-size: 1.6em
+            text-align: center
+            padding: 10% 0
+        img
+            height: 12rem
+            object-fit: cover
+
+// Form Styles
+textarea
+    width: 100%
+
+.form-control
+    color: $redPurple
+    background-color: rgba(230, 230, 230, 0.4)
+    border-color: rgba(99, 99, 99, 0.4)
+    padding: 0 0 0 5px
+
+#recipe_name
+    text-align: left
+    @include text-shadow(white, 1px, -1px)
+    font-size: 2.2em
+
+#recipeVegetarian
+    display: inline
+
+#recipe_vegetarian
+    display: inline
+    width: 0
+    margin-right: .5em
+    position: relative
+    top: 10px
+
+#recipeSubmit
+    border: 1px solid black
+    &:hover
+        border: 1px solid $dustStorm
+
+#recipe_description
+    font-size: 1em
+
+#recipe_submittedby
+    display: inline
+    font-size: 1.1em
+    @include text-shadow(white, 1px, -1px)
+
+#recipeMinutes
+    padding-top: 1rem
+    div:first-of-type
+        width: 50%
+        padding-right: 0
+    div:last-of-type
+        padding-left: 0
+
+#recipeImageURL
+    padding-top: 1rem
+
+#recipeIngredients textarea
+    height: 2em
+
+#recipeInstructions textarea
+    height: 5em

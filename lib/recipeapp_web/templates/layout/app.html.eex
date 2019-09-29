@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Recipeapp · Phoenix Framework</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Sniglet:800|Titan+One|Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-6" id="appTitle">
+          <h1><%= link "Recipe App", to: Routes.database_path(@conn, :index) %></h1>
+        </div>
+        <div class="col-2" id="recipeSearch">
+          <%= form_for @conn, Routes.database_path(@conn, :index), [method: :get], fn x -> %>
+          <div class="input-group">
+            <%= search_input x, :term, class: "form-control", placeholder: "Search" %>
+            <div class="input-group-append">
+              <%= submit  raw("<i class='fas fa-search'></i>"), class: "btn btn-sm" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <%= if @conn.assigns[:user] do %>
+        <div class="col-2" id="userName">
+          <h6><%= List.first(Regex.split(~r{@}, @conn.assigns[:user].email)) %></h6>
+          <div class="dropdown">
+            <%= link "My Recipes", to: Routes.database_path(@conn, :userRecipes, @conn.assigns[:user]) %>
+            <%= link 'New Recipe', to: Routes.database_path(@conn, :new) %>
+          </div>
+        </div>
+        <div class="col-2">
+          <%= link "Sign out", to: Routes.auth_path(@conn, :signout), method: :put, class: "btn btn-info" %>
+        </div>
+        <% else %>
+        <div class="col-2 offset-2">
+          <%= link "Sign In", to: Routes.auth_path(@conn, :request, "google"), class: "btn btn-info" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <%= render @view_module, @view_template, assigns %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+</body>
+
+</html>

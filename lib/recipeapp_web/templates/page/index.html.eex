@@ -1,0 +1,19 @@
+<section>
+  <%= %>
+
+  <%= form_for @conn, Routes.page_path(@conn, :index), fn x -> %>
+  <label>
+    Search: <%= text_input x, :term, placeholder: "Search" %>
+  </label>
+  <%= submit "Search" %>
+  <% end %>
+
+
+  <%= if assigns[:term] do %>
+  <% results = Recipeapp.spoonCall(@term, 4) %>
+
+  <%= for item <- results  do %>
+  <p><%= link item["title"], to: Routes.page_path(@conn, :show, item["id"]) %></p>
+  <% end %>
+  <% end %>
+</section>

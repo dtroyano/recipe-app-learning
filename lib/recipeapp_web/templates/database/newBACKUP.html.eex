@@ -1,0 +1,24 @@
+<h1>Add a New Recipe</h1>
+<%= form_for @changeset, Routes.database_path(@conn, :create), fn x -> %>
+<div class="form-group">
+    <%= text_input x, :name, placeholder: "Name", class: "form-control" %>
+    <%= text_input x, :image, placeholder: "Image URL", class: "form-control" %>
+    <%= textarea x, :description, placeholder: "Description", class: "form-control" %>
+    <%= label class: "control-label" do %> Ingredients
+    <%= array_input x, :ingredients %>
+    <%= array_add_button x, :ingredients %>
+    <% end %>
+    <%= label class: "control-label" do %> Instructions
+    <%= array_input x, :instructions %>
+    <%= array_add_button x, :instructions %>
+    <% end %>
+    <%= number_input x, :cook, placeholder: "Cooking Time in Minutes", class: "form-control" %>
+    <%= number_input x, :servings, placeholder: "Servings", class: "form-control" %>
+    <%= text_input x, :type, placeholder: "Type of food", class: "form-control" %>
+    <%= label class: "control-label" do %>
+    <%= checkbox x, :vegetarian, class: "form-control" %> Vegetarian
+    <% end %>
+    <%= text_input x, :submittedby, value: @conn.assigns[:user].email, class: "form-control" %>
+    <%= submit "Submit" %>
+</div>
+<% end %>

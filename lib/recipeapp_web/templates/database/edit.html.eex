@@ -1,0 +1,98 @@
+<div class="container" id="recipe">
+    <%= form_for @changeset, Routes.database_path(@conn, :update, @recipe), fn x -> %>
+    <div class="row">
+        <div class="col-6">
+            <%= text_input x, :name, placeholder: "Name", class: "form-control" %>
+        </div>
+        <div class="col-2 offset-4">
+            <%= submit "Submit", class: "btn btn-info", id: "recipeSubmit" %>
+        </div>
+    </div>
+    <div class="row" id="recipeHeader">
+        <div class="col-4">
+            <img class="img-thumbnail" id="recipeImage" src="<%= @recipe.image %>">
+        </div>
+        <div class="col-8" id="recipeDescription">
+            <div class="row" id="recipeDescriptionBox">
+                <%= textarea x, :description, placeholder: "Description", class: "form-control", rows: "6" %>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p id="recipeSubmitted">Submitted by:</p>
+                </div>
+                <div class="col-6">
+                    <%= text_input x, :submittedby, placeholder: "Submitted By", class: "form-control" %>
+                </div>
+            </div>
+            <div class="stickbottom">
+                <div class="row">
+                    <div class="col-2">
+                        <h3>Serves:</h3>
+                    </div>
+                    <div class="col-2">
+                        <%= number_input x, :servings, placeholder: "Servings", class: "form-control" %>
+                    </div>
+                </div>
+
+                <div class="row" id="recipeMinutes">
+                    <div class="col-2">
+                        <%= number_input x, :cook, placeholder: "Cooking Time in Minutes", class: "form-control" %>
+                    </div>
+                    <div class="col-4">
+                        <h3>Minutes</h3>
+                    </div>
+                    <div class="col-4">
+                        <%= label class: "control-label" do %>
+                        <%= checkbox x, :vegetarian, class: "form-control" %><h3 id="recipeVegetarian">Vegetarian</h3>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="recipeImageURL">
+        <div class="col-2">
+            <h3>Image Url:</h3>
+        </div>
+        <div class="col-10"><%= text_input x, :image, placeholder: "Image URL", class: "form-control" %></div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <h3>Tags:</h3>
+        </div>
+        <div class="col-10"><%= text_input x, :type, placeholder: "Type of food", class: "form-control" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 divider"></div>
+    </div>
+    <div class="row justify-content-left" id="recipeIngredients">
+        <div class="col-12">
+            <h2>Ingredients</h2>
+            <div class="row">
+                <div class="col-12">
+                    <%= array_input x, :ingredients %>
+                    <%= array_add_button x, :ingredients %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-left" id="recipeInstructions">
+        <div class="col-12">
+            <h2>Instructions</h2>
+
+            <div class="row">
+                <div class="col-12">
+                    <%= array_input x, :instructions %>
+                    <%= array_add_button x, :instructions %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>

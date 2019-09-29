@@ -1,0 +1,43 @@
+<div class="container">
+    <%= form_for @changeset, Routes.database_path(@conn, :update, @recipe), fn x -> %>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-12">
+                <label for="recipe_name">Recipe Name:</label>
+            </div>
+            <div class="col-10">
+                <%= text_input x, :name, placeholder: "Name", class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="recipe_description">Recipe Description:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <%= textarea x, :description, placeholder: "Description", class: "form-control" %>
+            </div>
+        </div>
+
+        <%= text_input x, :image, placeholder: "Image URL", class: "form-control" %>
+
+        <%= label class: "control-label" do %> Ingredients
+        <%= array_input x, :ingredients %>
+        <%= array_add_button x, :ingredients %>
+        <% end %>
+        <%= label class: "control-label" do %> Instructions
+        <%= array_input x, :instructions %>
+        <%= array_add_button x, :instructions %>
+        <% end %>
+        <%= number_input x, :cook, placeholder: "Cooking Time in Minutes", class: "form-control" %>
+        <%= number_input x, :servings, placeholder: "Servings", class: "form-control" %>
+        <%= text_input x, :type, placeholder: "Type of food", class: "form-control" %>
+        <%= label class: "control-label" do %>
+        <%= checkbox x, :vegetarian, class: "form-control" %> Vegetarian
+        <% end %>
+        <%= text_input x, :submittedby, placeholder: "Submitted By", class: "form-control" %>
+        <%= submit "Submit" %>
+    </div>
+    <% end %>
+</div>

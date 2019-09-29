@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row" id="index">
+        <%= for recipe <- @recipes do %>
+        <div class="col-3">
+            <%= link to: Routes.database_path(@conn, :show, recipe) do %>
+            <div class="card">
+                <img src="<%= recipe.image %>" alt="" class="card-img-top">
+                <hr>
+                <div class="card-body">
+                    <h5 class="card-title"><%= recipe.name %></h5>
+                </div>
+            </div>
+            <% end %>
+        </div>
+        <% end %>
+        <%= if @term do %>
+        <% results = Recipeapp.spoonCall(@term, 10) %>
+        <%= for item <- results  do %>
+        <div class="col-3">
+            <%= link to: Routes.page_path(@conn, :show, item["id"]) do %>
+            <div class="card">
+                <img src="https://spoonacular.com/recipeImages/<%= item["image"] %>" alt="" class="card-img-top">
+                <hr>
+                <div class="card-body">
+                    <h5 class="card-title"><%= item["title"] %></h5>
+                </div>
+            </div>
+            <% end %>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>

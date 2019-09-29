@@ -1,0 +1,79 @@
+<div class="container" id="recipe">
+    <div class="row">
+        <div class="col-10">
+            <h1 id="recipeTitle"><%= @item["title"] %></h1>
+        </div>
+    </div>
+    <div class="row" id="recipeHeader">
+        <div class="col-4">
+            <img class="img-thumbnail" id="recipeImage" src="<%= @item["image"] %>">
+        </div>
+        <div class="col-8" id="recipeDescription">
+            <div class="row" id="recipeDescriptionBox">
+                <p>RECIPE DESCRIPTION</p>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p id="recipeSubmitted">Submitted by: <strong><%= @item["sourceName"] %></strong></p>
+                </div>
+            </div>
+            <div class="stickBottom">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Serves: <%= @item["servings"] %></h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <%= if List.first(@time) > 0 do %>
+                        <h4><%= List.first(@time) %> Hours</h4>
+                        <% end %>
+                        <h4><%= List.last(@time) %> Minutes</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 divider"></div>
+    </div>
+    <div class="row justify-content-left" id="recipeIngredients">
+        <div class="col-4">
+            <h2>Ingredients</h2>
+            <div class="row">
+                <div class="col-12">
+                    <ul>
+                        <%= for item <- @item["extendedIngredients"] do %>
+                        <li>
+                            <%= item["original"] %>
+                        </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= if @item["analyzedInstructions"] != [] do %>
+    <div class="row justify-content-left" id="recipeInstructions">
+        <div class="col-4">
+            <h2>Instructions</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <ol>
+                <% [%{"steps" => instructions}] = @item["analyzedInstructions"] %>
+                <%= for elem <- instructions do %>
+
+                <li>
+                    <%= elem["step"] %>
+                </li>
+                <% end %>
+            </ol>
+        </div>
+    </div>
+    <% end %>
+
+
+</div>
